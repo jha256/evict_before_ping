@@ -12,16 +12,14 @@ benign_cnt = 0
 adversary_cnt = 0
 peers = {} # store peers of the victim in dictionary -> id : peer
 evict_before_ping_fail_list = set()
-evict_before_block_fail_list = set()
-evict_before_tx_fail_list = set()
 min_ping_time_list = list()
 
 evict_before_ping = 0 # success evict-before-ping
-evict_before_block = 0 # success evict-before-block
 
-
+# exceptional cases: benign peers with abnormal behaviour
 type_two = 0
 type_three = 0
+
 with open('/home/ubuntu/.bitcoin/debug.log', 'rt') as f:
     while True:
         line = f.readline()
@@ -63,6 +61,7 @@ with open('/home/ubuntu/.bitcoin/debug.log', 'rt') as f:
                 if peers[peerid].ping == False:
                     evict_before_ping += 1                
                 peers[peerid].evicted = True
+        # Below cases are benign peers disconnected under unexpected behavior. "type 2, type 3" are logged by modified bitcoin client.
         elif 'type 2' in line:
             peerid = int(line.strip().split(' ')[-1].split('=')[1])
             if peerid in peers.keys() and peers[peerid].nodetype == 2:
