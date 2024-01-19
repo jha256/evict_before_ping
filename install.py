@@ -41,9 +41,9 @@ def install():
     stdout.channel.recv_exit_status()
     
     print('making bitcoin config file...')
-    _, stdout, _ = victim.exec_command('mkdir /home/ubuntu/datadir')
+    _, stdout, _ = victim.exec_command('mkdir /home/ubuntu/.bitcoin')
     stdout.channel.recv_exit_status()
-    _, stdout, _ = victim.exec_command('echo -e "rpcuser=1234\\nrpcpassword=1234\\ndebug=1\\n" > /home/ubuntu/datadir/bitcoin.conf')
+    _, stdout, _ = victim.exec_command('echo -e "rpcuser=1234\\nrpcpassword=1234\\ndebug=1\\n" > /home/ubuntu/.bitcoin/bitcoin.conf')
     stdout.channel.recv_exit_status()
 
     print('initializing adversary instance...')
