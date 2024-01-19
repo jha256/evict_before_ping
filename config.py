@@ -1,3 +1,4 @@
+# change the IPs + store the key under PEM directory
 config_seoul = {
     'IP': "10.0.0.1",
     'Key': "PEM/rtt_seoul.pem" 
